@@ -28,8 +28,7 @@ angular
       })
 	  .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'login'
+        controller: 'LoginCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -40,5 +39,4 @@ angular
         redirectTo: '/'
       });
 	  
-	  $locationProvider.html5Mode(true);
   });

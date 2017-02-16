@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name thapeloAssignmentApp.loginService
+ * @name thapeloAssignmentApp.project.service
  * @description
- * # loginService
+ * # project.service
  * Service in the thapeloAssignmentApp.
  */
 angular.module('thapeloAssignmentApp')
-  .service('loginService', function () {
+  .service('project.service', function () {
     // AngularJS will instantiate a singleton by calling "new" on this function
   });

@@ -8,10 +8,27 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('LoginCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('LoginCtrl', function ($scope, $location, UserService) {
+	
+	$scope.login = function(){
+		if(typeof $scope.username === "undefined" || $scope.username == ""){
+			alert("username should not be empty");
+			return false;
+		}
+		
+		if(typeof $scope.password === "undefined" || $scope.password == ""){
+			alert("password should not be empty");
+			return false;
+		}
+		
+		UserService.Login($scope.username, $scope.password).then(LoginSuccess, LoginError);
+		
+		function LoginSuccess(response){
+			$location.path('/about');
+		}
+		
+		function LoginError(error){
+			alert('Login Failed');
+		}
+	}
   });
