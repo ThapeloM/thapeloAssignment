@@ -8,7 +8,7 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('CreateprojectCtrl', function ($scope) {
+  .controller('CreateprojectCtrl', function ($scope,ProjectService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,9 +16,22 @@ angular.module('thapeloAssignmentApp')
     ];
 	
 	
-	
 	$scope.save = function(project){
-		
-		console.log(project);
+		ProjectService.CreateProjects(project).then(ProjetsSuccess,ProjectsError);
 	}
+	
+	function ProjetsSuccess(response){
+		
+		if(response.status == 201 || response.status == 200){
+			console.log(response);
+		}else{
+			console.log(response);
+		}
+		
+	}
+	
+	function ProjectsError(error){
+		console.log(error)
+	}
+	
   });
