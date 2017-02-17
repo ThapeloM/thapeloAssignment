@@ -8,6 +8,37 @@
  * Service in the thapeloAssignmentApp.
  */
 angular.module('thapeloAssignmentApp')
-  .service('project.service', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-  });
+.service('ProjectService', ProjectService);
+
+      function ProjectService($http, $q, $location) {
+          this.Projects = Projects;
+		  
+		  function Projects() {
+			  
+			  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+			  
+			  if(typeof token == "undefined" || token == null){
+			  	  $location.path("/login");
+			   }
+	          var dfd = $q.defer();
+	          var request = {};
+			  var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/"
+ 
+			  request.method = "get";
+	          request.url = url;
+			  request.headers = {
+				  	'content-type':'application/json',
+			  		'Authorization':'Token ' + token.token
+			  };
+
+	          $http(request).then(function (response) {
+	              var data = response.data;
+                  console.log(data);
+	              dfd.resolve(data);
+	          }, function (err) {
+	              dfd.reject(err);
+	          });
+
+	          return dfd.promise;
+		}
+	}

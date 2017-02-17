@@ -24,7 +24,7 @@ angular.module('thapeloAssignmentApp')
 		UserService.Login($scope.username, $scope.password).then(LoginSuccess, LoginError);
 		
 		function LoginSuccess(response){
-			$location.path('/about');
+			$location.path('/projects');
 		}
 		
 		function LoginError(error){
