@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+	'alexjoffroy.angular-loaders'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

@@ -45,6 +45,8 @@ angular.module('thapeloAssignmentApp')
 	          return dfd.promise;
 		}
 		
+		
+		//create a project
   	  function CreateProjects(project) {
 		  
   		  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -81,8 +83,105 @@ angular.module('thapeloAssignmentApp')
 
     		return dfd.promise;
   		}
+		
+		
+		// add tasks to a project
+    	function CreateTask(task) {
+		  
+    		  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+    		  if(typeof token == "undefined" || token == null){
+    		  	  $location.path("/login");
+    		   }
+     		   var projecttask = {
+     			  title: task.title,
+     			  due_date: task.dueDate,
+     			  estimated_hours: task.estimatedhours,
+     			  project: project.id,
+     		    }
+		  
+              var dfd = $q.defer();
+              var request = {};
+    		    var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/"
+
+    		  request.method = "post";
+              request.url = url;
+    		  request.headers = {
+    			  	'content-type':'application/json',
+    		  		'Authorization':'Token ' + token.token
+    		  };
+    		  request.data = projecttask;
+
+              $http(request).then(function (response) {
+                  var data = response;
+                  dfd.resolve(data);
+              }, function (err) {
+                  dfd.reject(err);
+              });
+
+      		return dfd.promise;
+    	}
+			
+			
+		// add tasks to a project
+	    function DeleteProject(id) {
+		  
+	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+	    	if(typeof token == "undefined" || token == null){
+	    	 	  $location.path("/login");
+	   	    }
+
+	            var dfd = $q.defer();
+	            var request = {};
+	    		var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + id + "/";
+
+	    		request.method = "delete";
+	            request.url = url;
+	    		request.headers = {
+	    			  	'content-type':'application/json',
+	    		  		'Authorization':'Token ' + token.token
+	    		};
+
+	            $http(request).then(function (response) {
+	                var data = response;
+	                dfd.resolve(data);
+	            }, function (err) {
+	                  dfd.reject(err);
+	            });
+
+	      		return dfd.promise;
+	    }
+		
+		// add tasks to a project
+    	function ViewTasks(projectID) {
+		  
+    		  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+    		  if(typeof token == "undefined" || token == null){
+    		  	  $location.path("/login");
+    		   }
+
+              var dfd = $q.defer();
+              var request = {};
+    		  var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + projectID +"/";
+
+    		  request.method = "get";
+              request.url = url;
+    		  request.headers = {
+    			  	'content-type':'application/json',
+    		  		'Authorization':'Token ' + token.token
+    		  };
+
+              $http(request).then(function (response) {
+                  var data = response;
+                  dfd.resolve(data);
+              }, function (err) {
+                  dfd.reject(err);
+              });
+
+      		return dfd.promise;
+    	}
+			
 	
-	}
+}
 	
 	
 

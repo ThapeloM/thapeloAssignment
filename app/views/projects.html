@@ -23,6 +23,9 @@
                                         <th>end_date</th>
                                         <th>is_billable</th>
 										<th>is_active</th>
+										<th>view_tasks</th>
+										<th>edit</th>
+										<th>delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,6 +43,9 @@
                                             <div class="status success" ng-if="project.is_active == 'true'"></div>
                                             <div class="status failed" ng-if="project.is_active == 'false'"></div>
                                         </td>
+										<td><li><a ng-click="view()">view</a></li></td>
+										<td><li><a ng-click="edit()">edit</a></li></td>
+										<td><li><a ng-click="delete()">delete</a></li></td>
                                     </tr>
 	
                                 </tbody>

@@ -15,21 +15,28 @@
                 <div class="login-input-group">
 					<div class="form-group">
 					  <label for="comment">Description</label>
-					  <textarea class="form-control" rows="5" placeholder="Description" ng-model='project.description' id="projectDesciption"></textarea>
+					  <textarea class="form-control" rows="5" placeholder="Description" id="description" ng-model='project.description' id="projectDesciption"></textarea>
 					</div>
                     <span class="help-block ng-hide">Please enter project description</span>
                 </div>
+				
+			  <div class="login-input-group">
                 <div class="form-group">
                     <label class="LabelColorBlack">Start date</label>
                     <input type="text" class=" form-control textColorBlack" placeholder="Start Date" aria-describedby="basic-addon2" name="startDate" ng-model='project.startDate' id="startdate">
                     <span class="help-block ng-hide">Please enter start date</span>
                 </div>
+			 </div>
+			 
+			  <div class="login-input-group">
                 <div class="form-group">
                     <label class="LabelColorBlack">End date</label>
                     <input type="text" class=" form-control textColorBlack" placeholder="End Date" aria-describedby="basic-addon2" name="end date" ng-model='project.endDate' id="enddate">
                     <span class="help-block ng-hide">Please enter end date</span>
                 </div>
+			  </div>
 			  
+			  <div class="login-input-group">
 			  <div class="form-group">
 			    <label for="billable">Billable</label>
 			    <select class="form-control" id="billable" ng-model="project.billable">
@@ -37,8 +44,12 @@
 			      <option selected="selected">True</option>
 			      <option>False</option>
 			    </select>
+				<span class="help-block ng-hide">Please select option</span>
 			  </div>
+		  </div>
 			  
+			  
+			 <div class="login-input-group">
 			  <div class="form-group">
 			    <label for="active">Active</label>
 			    <select class="form-control" id="active" ng-model="project.active">
@@ -46,7 +57,9 @@
 			      <option>True</option>
 			      <option selected="selected">False</option>
 			    </select>
+				<span class="help-block ng-hide">Please select option</span>
 			  </div>
+		  </div>
 				
 				<br>
                 <button ng-click="save(project)" class="btn btn-primary margin-t" type="button">Add Project</button>
