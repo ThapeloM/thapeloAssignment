@@ -25,8 +25,9 @@ angular.module('thapeloAssignmentApp')
 	}
 	
 	//edit project
-	$scope.edit = function(id){
-		$location.path('/viewprojecttasks').search({id: id});
+	$scope.edit = function(project){
+		$window.localStorage.setItem('project', JSON.stringify(project));
+		$location.path('/editproject');
 	}
 	
 	//delete project
@@ -86,50 +87,101 @@ angular.module('thapeloAssignmentApp')
 
 	
   })
-  .controller('EditProjectCtrl', function (ProjectService, $scope, $location) {
+  .controller('EditProjectCtrl', function (ProjectService, $scope, $location, $routeParams, $window) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+
+	$scope.projectDetails = JSON.parse($window.localStorage.getItem('project'));
 	
-	
-	//get project list
-	ProjectService.Projects().then(ProjetsSuccess,ProjectsError);
-	
-	
-	//view tasks
-	$scope.view = function(id){
-		ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
+	if($scope.projectDetails.is_billable){
+		document.getElementById("biltrue").selected = "true";
+	}else{
+		document.getElementById("bilfalse").selected = "true";
 	}
-	//edit project
-	$scope.edit = function(id){
-		
+	if($scope.projectDetails.is_active){
+		document.getElementById("activeTrue").selected = "true";
+	}else{
+		document.getElementById("activeFalse").selected = "true";
 	}
+    
 	
-	//delete project
-	$scope.delete = function(id){
+	$scope.update = function(project){
+        var hasErrors = false;
 		
-	}
-	
-	function ProjetsSuccess(response){
+        if (!project || !project.title) {
+            angular.element('#projectTitle').parent().addClass('has-error');
+            angular.element('#projectTitle').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#projectTitle').parent().removeClass('has-error');
+            angular.element('#projectTitle').siblings('.help-block').addClass('ng-hide');
+        }
 		
+        if (!project || !project.description) {
+            angular.element('#description').parent().addClass('has-error');
+            angular.element('#description').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#description').parent().removeClass('has-error');
+            angular.element('#description').siblings('.help-block').addClass('ng-hide');
+        }
 		
-		if(response.status == 200){
+        if (!project || !project.startDate) {
+            angular.element('#startdate').parent().addClass('has-error');
+            angular.element('#startdate').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#startdate').parent().removeClass('has-error');
+            angular.element('#startdate').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.endDate) {
+            angular.element('#enddate').parent().addClass('has-error');
+            angular.element('#enddate').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#enddate').parent().removeClass('has-error');
+            angular.element('#enddate').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.billable) {
+            angular.element('#billable').parent().addClass('has-error');
+            angular.element('#billable').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#billable').parent().removeClass('has-error');
+            angular.element('#billable').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.active) {
+            angular.element('#active').parent().addClass('has-error');
+            angular.element('#active').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#active').parent().removeClass('has-error');
+            angular.element('#active').siblings('.help-block').addClass('ng-hide');
+        }
+
+
+        if (hasErrors) {
+            return false;
+        }else{
+			project.is_billable = $("#billable").val();
+			project.is_active = $("#active").val();
+        	ProjectService.EditProject(project).then(ProjetsSuccess,ProjectsError);
+        }
 			
-			console.log(response.data)
-            $scope.projects = response.data;
-            $scope.rowCollection = $scope.projects;
-		}
 	}
 	
-	function TasksSuccess(response){
+	function ProjetsSuccess(response){		
 		if(response.status == 200){
-            $scope.tasks = response.data;
-			$scope.rowCollection = $scope.tasks;
+
 		}
 	}
-	
 	function ProjectsError(error){
 		console.log(error)
 	}

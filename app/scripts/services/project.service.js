@@ -18,6 +18,7 @@ angular.module('thapeloAssignmentApp')
 		  this.CreateTask = CreateTask;
 		  this.DeleteProject = DeleteProject;
 		  this.ViewTasks = ViewTasks;
+		  this.EditProject = EditProject;
 		  
 		  function Projects() {
 			  
@@ -85,6 +86,47 @@ angular.module('thapeloAssignmentApp')
 
     		return dfd.promise;
   		}
+		
+		
+  		//edit a project
+    	function EditProject(project) {
+		  
+    		  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+    		  if(typeof token == "undefined" || token == null){
+    		  	  $location.path("/login");
+    		   }
+     		  var project = {
+				  pk: project.pk,
+     			  title: project.title,
+     			  description: project.description,
+     			  start_date: project.start_date,
+     			  end_date: project.start_date,
+     			  is_billable: project.is_billable,
+     			  is_active: project.is_active
+     		  }
+		  
+              var dfd = $q.defer();
+              var request = {};
+    		    var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/"
+
+    		  request.method = "put";
+              request.url = url;
+    		  request.headers = {
+    			  	'content-type':'application/json',
+    		  		'Authorization':'Token ' + token.token
+    		  };
+    		  request.data = project;
+
+              $http(request).then(function (response) {
+                  var data = response;
+                  dfd.resolve(data);
+              }, function (err) {
+                  dfd.reject(err);
+              });
+
+      		return dfd.promise;
+    	}
+		
 		
 		
 		// add tasks to a project

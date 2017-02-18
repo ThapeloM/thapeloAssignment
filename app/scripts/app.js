@@ -48,6 +48,10 @@ angular
         templateUrl: 'views/viewTasks.html',
         controller: 'ViewProjectTasksCtrl'
       })
+      .when('/editproject', {
+        templateUrl: 'views/editProject.html',
+        controller: 'EditProjectCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

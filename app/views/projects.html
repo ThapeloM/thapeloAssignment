@@ -43,9 +43,9 @@
                                             <div class="status success" ng-if="project.is_active"></div>
                                             <div class="status failed" ng-if="!project.is_active"></div>
                                         </td>
-										<td><li><a ng-click="view(project.pk)">view</a></li></td>
-										<td><li><a ng-click="edit(project.pk)">edit</a></li></td>
-										<td><li><a ng-click="delete(project.pk)">delete</a></li></td>
+										<td><i class="material-icons" ng-click="view(project.pk)">view_agenda</i></td>
+										<td><i class="material-icons" ng-click="edit(project)">mode_edit</i></td>
+										<td><i class="material-icons" ng-click="delete(project.pk)">delete_forever</i></td>
                                     </tr>
 	
                                 </tbody>
