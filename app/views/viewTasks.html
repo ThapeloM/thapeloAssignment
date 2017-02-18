@@ -1,0 +1,49 @@
+<div class="input">
+    <form class="form-horizontal styledContainer">
+        <div class="conter-wrapper ">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{projectName}} Tasks
+                    </h3>
+                        </div>
+                        <div class="search_container">
+                <input type="text" class="search" placeholder="search" ng-model="query" />
+                <span class="glyphicon glyphicon-search search-icon" aria-hidden="true"></span>
+            </div>
+                        <div class="panel-body">
+                            <table class="table table-hover" st-safe-src="rowCollection" st-table="tasks">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Due Date</th>
+                                        <th>Estimated Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(id, task) in tasks | filter: search" style="text-align: left;">
+                                        <td>{{task.id}}</td>
+                                        <td>{{task.title }}</td>
+                                        <td>{{task.due_date}}</td>
+                                        <td>{{task.estimated_hours}}</td>
+                                    </tr>
+	
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7" class="textCenter">
+                                            <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+							<button ng-click="addProject()" class="btn btn-primary margin-t" type="button">Add Task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

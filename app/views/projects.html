@@ -17,35 +17,35 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>title</th>
-                                        <th>description</th>
-                                        <th>start_date</th>
-                                        <th>end_date</th>
-                                        <th>is_billable</th>
-										<th>is_active</th>
-										<th>view_tasks</th>
-										<th>edit</th>
-										<th>delete</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Billable</th>
+										<th>Active</th>
+										<th>View Tasks</th>
+										<th>Edit</th>
+										<th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="(id, project) in projects | filter: search" style="text-align: left;">
                                         <td>{{project.pk}}</td>
-                                        <td>{{project.title | capitalize: true}}</td>
-                                        <td>{{project.description | capitalize: true}}</td>
-                                        <td>{{project.start_date | date : 'dd/MMMM/yyyy'}}</td>
-                                        <td>{{project.end_date | date : 'dd/MMMM/yyyy'}}</td>
+                                        <td>{{project.title }}</td>
+                                        <td>{{project.description}}</td>
+                                        <td>{{project.start_date | date : 'dd-MM-yy'}}</td>
+                                        <td>{{project.end_date | date : 'dd-MM-yy'}}</td>
                                         <td class="text-left">
-                                            <div class="status success" ng-if="project.is_billable == 'true'"></div>
-                                            <div class="status failed" ng-if="project.is_billable == 'false'"></div>
+                                            <div class="status success" ng-if="project.is_billable"></div>
+                                            <div class="status failed" ng-if="!project.is_billable"></div>
                                         </td>
                                         <td class="text-left">
-                                            <div class="status success" ng-if="project.is_active == 'true'"></div>
-                                            <div class="status failed" ng-if="project.is_active == 'false'"></div>
+                                            <div class="status success" ng-if="project.is_active"></div>
+                                            <div class="status failed" ng-if="!project.is_active"></div>
                                         </td>
-										<td><li><a ng-click="view()">view</a></li></td>
-										<td><li><a ng-click="edit()">edit</a></li></td>
-										<td><li><a ng-click="delete()">delete</a></li></td>
+										<td><li><a ng-click="view(project.pk)">view</a></li></td>
+										<td><li><a ng-click="edit(project.pk)">edit</a></li></td>
+										<td><li><a ng-click="delete(project.pk)">delete</a></li></td>
                                     </tr>
 	
                                 </tbody>

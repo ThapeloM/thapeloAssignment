@@ -80,6 +80,23 @@ body {
     display: block;
     margin: auto;
 }
+
+.status {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}
+
+.status.warn {
+  background: #ffa225;
+}
+.status.failed {
+  background: #fb1c1c;
+}
+.status.success {
+  background: #3bc507;
+}
+
 .search_container{
 	position: absolute;
 	    right: 30px;
@@ -94,6 +111,10 @@ body {
 		    right: 25px;
 		    top: 3px;
 		}
+}
+
+li {
+  list-style-type: none;
 }
 
 #form > div {

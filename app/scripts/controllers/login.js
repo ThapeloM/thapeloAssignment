@@ -37,22 +37,22 @@ angular.module('thapeloAssignmentApp')
             return false;
         }else{
             $scope.$parent.message = "please wait...";
-            $scope.$parent.loading = true;
+            // $scope.$parent.loading = true;
         	UserService.Login($scope.username, $scope.password).then(LoginSuccess, LoginError);
         }
 
 		
 		function LoginSuccess(response){
-			$scope.$parent.loading = false;
+			// $scope.$parent.loading = false;
 			$location.path('/projects');
 		}
 		
 		function LoginError(error){
-			$scope.$parent.loading = false;
-            $scope.$parent.alerts = [{
-                type: 'growl-error',
-                msg: "invalid username or password"
-            }];
+			// $scope.$parent.loading = false;
+	//             $scope.$parent.alerts = [{
+	//                 type: 'growl-error',
+	//                 msg: "invalid username or password"
+	//             }];
 		}
 	}
   });

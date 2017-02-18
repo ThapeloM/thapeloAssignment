@@ -15,6 +15,9 @@ angular.module('thapeloAssignmentApp')
       function ProjectService($http, $q, $location) {
           this.Projects = Projects;
 		  this.CreateProjects = CreateProjects;
+		  this.CreateTask = CreateTask;
+		  this.DeleteProject = DeleteProject;
+		  this.ViewTasks = ViewTasks;
 		  
 		  function Projects() {
 			  
@@ -35,8 +38,7 @@ angular.module('thapeloAssignmentApp')
 			  };
 
 	          $http(request).then(function (response) {
-	              var data = response.data;
-                  console.log(data);
+	              var data = response;
 	              dfd.resolve(data);
 	          }, function (err) {
 	              dfd.reject(err);
@@ -122,7 +124,7 @@ angular.module('thapeloAssignmentApp')
     	}
 			
 			
-		// add tasks to a project
+		// delete a project
 	    function DeleteProject(id) {
 		  
 	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -132,7 +134,7 @@ angular.module('thapeloAssignmentApp')
 
 	            var dfd = $q.defer();
 	            var request = {};
-	    		var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + id + "/";
+	    		var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + id + "/";
 
 	    		request.method = "delete";
 	            request.url = url;
@@ -179,6 +181,36 @@ angular.module('thapeloAssignmentApp')
 
       		return dfd.promise;
     	}
+		
+		
+		// add tasks to a project
+	    function DeleteTask(id) {
+		  
+	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+	    	if(typeof token == "undefined" || token == null){
+	    	 	  $location.path("/login");
+	   	    }
+
+	            var dfd = $q.defer();
+	            var request = {};
+	    		var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + id + "/";
+
+	    		request.method = "delete";
+	            request.url = url;
+	    		request.headers = {
+	    			  	'content-type':'application/json',
+	    		  		'Authorization':'Token ' + token.token
+	    		};
+
+	            $http(request).then(function (response) {
+	                var data = response;
+	                dfd.resolve(data);
+	            }, function (err) {
+	                  dfd.reject(err);
+	            });
+
+	      		return dfd.promise;
+	    }
 			
 	
 }
