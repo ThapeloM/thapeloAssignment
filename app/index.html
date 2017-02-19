@@ -52,8 +52,9 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container table">
     <div ng-view=""></div>
+	<div loader-css="ball-pulse"></div>
     </div>
 
     <div class="footer">
@@ -88,6 +89,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-loaders/dist/angular-loaders.js"></script>
+	<script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- endbower -->
@@ -95,7 +97,6 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-		<script src="scripts/common/particles.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
@@ -103,6 +104,7 @@
         <script src="scripts/services/project.service.js"></script>
         <script src="scripts/controllers/projects.js"></script>
         <script src="scripts/controllers/createproject.js"></script>
+        <script src="scripts/directives/requestpending.js"></script>
         <!-- endbuild -->
 </body>
 </html>

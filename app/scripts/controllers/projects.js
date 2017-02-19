@@ -15,6 +15,9 @@ angular.module('thapeloAssignmentApp')
       'Karma'
     ];
 	
+	$scope.loading = true;
+	$scope.message = "loading";
+	
 	
 	//get project list
 	ProjectService.Projects().then(ProjetsSuccess,ProjectsError);
@@ -39,17 +42,20 @@ angular.module('thapeloAssignmentApp')
 		if(response.status == 200){
             $scope.projects = response.data;
             $scope.rowCollection = $scope.projects;
+			$scope.loading = false;
 		}
 	}
 	
 	function DeleteSuccess(response){
 		if(response.status == 204){
             $window.location.reload();
+			
 		}
 	}
 	
 	function ProjectsError(error){
 		console.log(error)
+		$scope.loading = false;
 	}
 	
 	$scope.addProject = function(){
@@ -81,8 +87,8 @@ angular.module('thapeloAssignmentApp')
 		console.log(error)
 	}
 	
-	$scope.addProject = function(){
-		$location.path('/createproject');
+	$scope.addTask = function(){
+		$location.path('/createtask');
 	}
 
 	

@@ -1,6 +1,6 @@
  <div loader-css="ball-pulse-rise"></div>
 <div class="container">    
-    <div id="loginbox" class="jumbotron ng-scope"> 
+    <div id="loginbox" class="ng-scope"> 
         
         <div class="panel panel-default" >
             <div class="panel-heading">
@@ -25,7 +25,7 @@
 
                     <div class="form-group">
                         <!-- Button -->
-                        <div class="col-sm-8 controls">
+                        <div class="m-r-15">
                             <button type="submit" ng-click="login()" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
                         </div>
                     </div>
@@ -37,5 +37,4 @@
     </div>
 </div>
 
-<div id="particles"></div>
-
+<div ng-include="'views/partials/particles.html'"></div>

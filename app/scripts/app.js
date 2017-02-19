@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-	'alexjoffroy.angular-loaders'
+	'alexjoffroy.angular-loaders',
+	'smart-table'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -51,6 +52,10 @@ angular
       .when('/editproject', {
         templateUrl: 'views/editProject.html',
         controller: 'EditProjectCtrl'
+      })
+      .when('/createtask', {
+        templateUrl: 'views/createTask.html',
+        controller: 'CreateprojectTaskCtrl'
       })
       .otherwise({
         redirectTo: '/'

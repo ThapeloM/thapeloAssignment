@@ -13,6 +13,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 body {
   padding: 0;
   background-color: white;
+  color: #999;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -21,6 +22,11 @@ body {
 .footer {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.container.table {
+    max-width: 90%;
+    width: 90%;
 }
 
 /* Custom page header */
@@ -165,6 +171,82 @@ li {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+
+.spinner-container {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.23);
+  z-index: 2001;
+  display: table;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+}
+
+
+.spinner{
+  position: absolute;
+  top: 48%;
+  left: 0;
+  right: 0;
+  z-index: 2001;
+  width: 40px;
+  background: #fff;
+  height: 40px;
+  margin: auto;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+.spinner-label {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  top: 40px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  z-index: 2000;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.23);
+  z-index: 2;
+}
+
+.textCenter{
+	text-align: center;
+}
+
+.m-r-10{
+	margin-right: 10px;
+}
+
+.m-r-15{
+	margin-right: 15px;
+}
+
+@keyframes sk-rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
 }
 
 /* Responsive: Portrait tablets and up */
