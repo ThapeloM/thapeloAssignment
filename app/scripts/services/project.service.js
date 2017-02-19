@@ -107,9 +107,9 @@ angular.module('thapeloAssignmentApp')
 		  
               var dfd = $q.defer();
               var request = {};
-    		    var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/"
+    		    var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk + "/"
 
-    		  request.method = "put";
+    		  request.method = "PUT";
               request.url = url;
     		  request.headers = {
     			  	'content-type':'application/json',

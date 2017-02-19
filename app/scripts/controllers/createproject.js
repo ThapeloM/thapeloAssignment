@@ -18,7 +18,7 @@ angular.module('thapeloAssignmentApp')
 	
 	$scope.save = function(project){
         var hasErrors = false;
-		
+		console.log(project)
         if (!project || !project.title) {
             angular.element('#projectTitle').parent().addClass('has-error');
             angular.element('#projectTitle').siblings('.help-block').removeClass('ng-hide');

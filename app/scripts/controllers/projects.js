@@ -112,6 +112,12 @@ angular.module('thapeloAssignmentApp')
 	$scope.update = function(project){
         var hasErrors = false;
 		
+		if(project){
+			project.is_billable = $("#billable").val();
+			project.is_active = $("#active").val();
+		}
+	
+		console.log(project);
         if (!project || !project.title) {
             angular.element('#projectTitle').parent().addClass('has-error');
             angular.element('#projectTitle').siblings('.help-block').removeClass('ng-hide');
@@ -130,7 +136,7 @@ angular.module('thapeloAssignmentApp')
             angular.element('#description').siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.startDate) {
+        if (!project || !project.start_date) {
             angular.element('#startdate').parent().addClass('has-error');
             angular.element('#startdate').siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
@@ -139,7 +145,7 @@ angular.module('thapeloAssignmentApp')
             angular.element('#startdate').siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.endDate) {
+        if (!project || !project.end_date) {
             angular.element('#enddate').parent().addClass('has-error');
             angular.element('#enddate').siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
@@ -148,7 +154,7 @@ angular.module('thapeloAssignmentApp')
             angular.element('#enddate').siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.billable) {
+        if (!project || !project.is_billable) {
             angular.element('#billable').parent().addClass('has-error');
             angular.element('#billable').siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
@@ -157,7 +163,7 @@ angular.module('thapeloAssignmentApp')
             angular.element('#billable').siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.active) {
+        if (!project || !project.is_active) {
             angular.element('#active').parent().addClass('has-error');
             angular.element('#active').siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
@@ -170,8 +176,6 @@ angular.module('thapeloAssignmentApp')
         if (hasErrors) {
             return false;
         }else{
-			project.is_billable = $("#billable").val();
-			project.is_active = $("#active").val();
         	ProjectService.EditProject(project).then(ProjetsSuccess,ProjectsError);
         }
 			
@@ -179,7 +183,7 @@ angular.module('thapeloAssignmentApp')
 	
 	function ProjetsSuccess(response){		
 		if(response.status == 200){
-
+			$window.localStorage.setItem('project', JSON.stringify(response.data));
 		}
 	}
 	function ProjectsError(error){
