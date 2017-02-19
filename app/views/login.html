@@ -1,7 +1,17 @@
- <div loader-css="ball-pulse-rise"></div>
+<request-pending ng-model="loading" message="message"></request-pending>
 <div class="container">    
     <div id="loginbox" class="ng-scope"> 
-        
+  
+        <div class="row">                
+            <div class="iconmelon">
+              <svg viewBox="0 0 32 32">
+                <g filter="">
+                  <use xlink:href="#git"></use>
+                </g>
+              </svg>
+            </div>
+        </div>
+		<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
         <div class="panel panel-default" >
             <div class="panel-heading">
                 <div class="panel-title text-center">Tangent Assignment</div>

@@ -8,11 +8,18 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('LoginCtrl', function ($scope, $location, UserService) {
+  .controller('LoginCtrl', function ($scope, $location, UserService, $rootScope) {
 	
+	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+	if(typeof token == "undefined" || token == null){
+	 	  $rootScope.session = false;
+    }else{
+    	$rootScope.session = true;
+		$location.path('/projects');
+    }
+	$scope.error = false;
 	$scope.login = function(){
-		
-		
+			
         var hasErrors = false;
 		
 		if(typeof $scope.username === "undefined" || $scope.username == ""){
@@ -36,23 +43,21 @@ angular.module('thapeloAssignmentApp')
         if (hasErrors) {
             return false;
         }else{
-            $scope.$parent.message = "please wait...";
-            // $scope.$parent.loading = true;
+			$scope.loading = true;
+			$scope.message = "Please wait";			
         	UserService.Login($scope.username, $scope.password).then(LoginSuccess, LoginError);
         }
 
 		
 		function LoginSuccess(response){
-			// $scope.$parent.loading = false;
+			$scope.loading = false;
 			$location.path('/projects');
 		}
 		
 		function LoginError(error){
-			// $scope.$parent.loading = false;
-	//             $scope.$parent.alerts = [{
-	//                 type: 'growl-error',
-	//                 msg: "invalid username or password"
-	//             }];
+			$scope.loading = false;
+			$scope.error = true;
+			$scope.errorMessage = "Unable to login with provided credentials.";
 		}
 	}
   });

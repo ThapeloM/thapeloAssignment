@@ -10,13 +10,12 @@
                             <h3 class="panel-title">{{projectName}} Tasks
                     </h3>
                         </div>
-                        <div class="search_container">
-                <input type="text" class="search" placeholder="search" ng-model="query" />
-                <span class="glyphicon glyphicon-search search-icon" aria-hidden="true"></span>
-            </div>
                         <div class="panel-body">
                             <table class="table table-hover" st-safe-src="rowCollection" st-table="tasks">
                                 <thead>
+ 									<tr>
+ 									 <th colspan="2"><input st-search="" class="form-control" placeholder="search ..." type="text"/></th>
+ 								   </tr>
                                     <tr>
                                         <th>Id</th>
                                         <th>Title</th>

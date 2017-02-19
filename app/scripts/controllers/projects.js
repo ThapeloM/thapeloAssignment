@@ -8,7 +8,7 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('ProjectsCtrl', function (ProjectService, $scope, $location,$window) {
+  .controller('ProjectsCtrl', function (ProjectService, $scope, $location,$window,$rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -19,6 +19,7 @@ angular.module('thapeloAssignmentApp')
 	$scope.message = "loading";
 	$scope.success = false;
 	$scope.error = false;
+	$rootScope.session = true;
 	
 	
 	//get project list
@@ -68,11 +69,16 @@ angular.module('thapeloAssignmentApp')
 	$scope.addProject = function(){
 		$location.path('/createproject');
 	}
+	
+	$scope.logout = function(){
+		window.localStorage.removeItem('TrustedToken');
+		$location.path('/login');
+	}
 
 	
   })
   
-  .controller('ViewProjectTasksCtrl', function (ProjectService, $scope, $location,$routeParams) {
+  .controller('ViewProjectTasksCtrl', function (ProjectService, $scope, $location,$routeParams,$rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -80,11 +86,17 @@ angular.module('thapeloAssignmentApp')
     ];
 		
 	
+    var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+  
+    if(typeof token == "undefined" || token == null){
+  	  $location.path("/login");
+    }
 	var id = $routeParams.id;
 	$scope.tasks = [];
 	$scope.loading = true;
 	$scope.message = "loading";
 	$scope.info = false;
+	$rootScope.session = true;
 	ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
 
 	function TasksSuccess(response){
@@ -104,18 +116,29 @@ angular.module('thapeloAssignmentApp')
 	$scope.addTask = function(){
 		$location.path('/createtask');
 	}
-
+	
+	$scope.logout = function(){
+		window.localStorage.removeItem('TrustedToken');
+		$location.path('/login');
+	}
+	
 	
   })
-  .controller('EditProjectCtrl', function (ProjectService, $scope, $location, $routeParams, $window) {
+  .controller('EditProjectCtrl', function (ProjectService, $scope, $location, $routeParams, $window, $rootScope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
+	  var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+  
+	  if(typeof token == "undefined" || token == null){
+	  	  $location.path("/login");
+	   }
 	$scope.success = false;
 	$scope.error = false;
+	$rootScope.session = true;
 	$scope.projectDetails = JSON.parse($window.localStorage.getItem('project'));
 	
 	if($scope.projectDetails.is_billable){
@@ -224,7 +247,11 @@ angular.module('thapeloAssignmentApp')
 	$scope.addProject = function(){
 		$location.path('/createproject');
 	}
-
+	
+	$scope.logout = function(){
+		window.localStorage.removeItem('TrustedToken');
+		$location.path('/login');
+	}
 	
   });
   
