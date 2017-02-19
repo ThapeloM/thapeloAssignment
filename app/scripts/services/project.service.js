@@ -139,8 +139,8 @@ angular.module('thapeloAssignmentApp')
      		   var projecttask = {
      			  title: task.title,
      			  due_date: task.dueDate,
-     			  estimated_hours: task.estimatedhours,
-     			  project: project.id,
+     			  estimated_hours: task.hours,
+     			  project: task.pk,
      		    }
 		  
               var dfd = $q.defer();

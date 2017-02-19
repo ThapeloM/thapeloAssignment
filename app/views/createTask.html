@@ -1,49 +1,59 @@
+<request-pending ng-model="loading" message="message"></request-pending>
+</pageheader>
 <div class="input">
-    <form class="form-horizontal styledContainer">
-        <div class="conter-wrapper ">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{projectName}} Tasks
-                    </h3>
-                        </div>
-                        <div class="search_container">
-                <input type="text" class="search" placeholder="search" ng-model="query" />
-                <span class="glyphicon glyphicon-search search-icon" aria-hidden="true"></span>
+    <div class="col-md-12 margin-tb">
+		<div class="alert alert-success" role="alert" ng-if="success">{{successMessage}}</div>
+		<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add Task</h3>
             </div>
-                        <div class="panel-body">
-                            <table class="table table-hover" st-safe-src="rowCollection" st-table="tasks">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Title</th>
-                                        <th>Due Date</th>
-                                        <th>Estimated Hours</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="(id, task) in tasks | orderBy:'id' | filter: search" style="text-align: left;">
-                                        <td>{{task.id}}</td>
-                                        <td>{{task.title }}</td>
-                                        <td>{{task.due_date}}</td>
-                                        <td>{{task.estimated_hours}}</td>
-                                    </tr>
-	
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="7" class="textCenter">
-                                            <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5"></div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-							<button ng-click="addTask()" class="btn btn-primary margin-t" type="button">Add Task</button>
-                        </div>
-                    </div>
+            <div class="panel-body form-group">
+                <div class="form-group">
+                    <label class="LabelColorBlack">Title</label>
+                    <input type="text" class="form-control textColorBlack" placeholder="Title" aria-describedby="basic-addon2" name="title" ng-model='task.title' id="taskTitle">
+                    <span class="help-block ng-hide">Please enter title</span>
                 </div>
+				
+			  <div class="login-input-group">
+                <div class="form-group">
+                    <label class="LabelColorBlack">Due date</label>					
+	  	          <div class="form-group">
+	  	              <div class='input-group date' id='datetimepicker7'>
+	  	                 <input type='text' class="form-control" placeholder="Due Date" ng-model="task.startDate" id="duedate" />
+	  	                  <span class="input-group-addon">
+	  	                      <span class="glyphicon glyphicon-calendar">
+	  	                      </span>
+	  	                  </span>
+	  	              </div>
+					  <span class="help-block ng-hide">Please enter task due date</span>
+	  	          </div>
+                </div>
+			 </div>
+			 
+			  <div class="login-input-group">
+                  <div class="form-group">
+                      <label class="LabelColorBlack">Estimated Hours</label>
+                      <input type="number" class="form-control textColorBlack" placeholder="estimated hours" aria-describedby="basic-addon2" name="title" ng-model='task.hours' id="taskHours" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+                      <span class="help-block ng-hide">Please enter hours</span>
+                  </div>
+			  </div>
+			  				
+				<br>
+                <button ng-click="save(task)" class="btn btn-primary margin-t" type="button">Add Task</button>
+
             </div>
         </div>
-    </form>
+    </div>
 </div>
+<script type="text/javascript">
+	    $(function () {
+			// use this to validate past date			
+		    // var date = new Date();
+ // 		 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+ // 		 minDate: today
+		    $('#datetimepicker7').datetimepicker({
+		            format: 'YYYY-MM-DD'
+	        });	     
+	   });
+</script>

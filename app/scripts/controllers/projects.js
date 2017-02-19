@@ -98,6 +98,10 @@ angular.module('thapeloAssignmentApp')
 	$scope.info = false;
 	$rootScope.session = true;
 	ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
+	
+	$scope.delete = function(){
+		ProjectService.DeleteTask(id).then(DeleteSuccess,DeleteError);
+	}
 
 	function TasksSuccess(response){
 		$scope.loading = false;
@@ -112,6 +116,21 @@ angular.module('thapeloAssignmentApp')
 		$scope.info = true;
 		$scope.infoMessage = "No Tasks available"
 	}
+	
+	function DeleteSuccess(response){
+		if(response.status == 204){
+			$scope.success = true;
+			$scope.successMessage = "Project successfully deleted";
+            $window.location.reload();	
+		}
+	}
+	
+	function DeleteError(error){
+		$scope.loading = false;
+		$scope.error = true;
+		scope.errorMessage = "Oh snap! Something went wrong, please try again";
+	}
+	
 	
 	$scope.addTask = function(){
 		$location.path('/createtask');
@@ -253,5 +272,191 @@ angular.module('thapeloAssignmentApp')
 		$location.path('/login');
 	}
 	
+  })
+  .controller('CreateprojectCtrl', function ($scope,ProjectService) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+	
+	$scope.success = false;
+	$scope.error = false;
+	
+	$scope.save = function(project){
+        var hasErrors = false;
+        if (!project || !project.title) {
+            angular.element('#projectTitle').parent().addClass('has-error');
+            angular.element('#projectTitle').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#projectTitle').parent().removeClass('has-error');
+            angular.element('#projectTitle').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.description) {
+            angular.element('#description').parent().addClass('has-error');
+            angular.element('#description').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#description').parent().removeClass('has-error');
+            angular.element('#description').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!angular.element('#startdate').val()) {
+            angular.element('#startdate').parent().parent().addClass('has-error');
+            angular.element('#startdate').parent().siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#startdate').parent().parent().removeClass('has-error');
+            angular.element('#startdate').parent().siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!angular.element('#enddate').val()) {
+            angular.element('#enddate').parent().parent().addClass('has-error');
+            angular.element('#enddate').parent().siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#enddate').parent().parent().removeClass('has-error');
+            angular.element('#enddate').parent().siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.billable) {
+            angular.element('#billable').parent().addClass('has-error');
+            angular.element('#billable').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#billable').parent().removeClass('has-error');
+            angular.element('#billable').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!project || !project.active) {
+            angular.element('#active').parent().addClass('has-error');
+            angular.element('#active').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#active').parent().removeClass('has-error');
+            angular.element('#active').siblings('.help-block').addClass('ng-hide');
+        }
+
+
+        if (hasErrors) {
+            return false;
+        }else{
+			project.startDate = angular.element('#startdate').val();
+			project.endDate = angular.element('#enddate').val();
+			$scope.loading = true;
+			$scope.message = "Please wait";
+        	ProjectService.CreateProjects(project).then(ProjetsSuccess,ProjectsError);
+        }
+			
+	}
+	
+	function ProjetsSuccess(response){
+		
+		if(response.status == 201 || response.status == 200){
+			$scope.loading = false;
+			$scope.success = true;
+			$scope.project = {};
+		    angular.element('#startdate').val("");
+		    angular.element('#enddate').val("");
+			$scope.successMessage = "Project successfully created";
+		}else{
+			$scope.loading = false;
+			$scope.error = true;
+			$scope.errorMessage = "Oh snap! Something went wrong, please try again";
+		}
+		
+	}
+	
+	function ProjectsError(error){
+		$scope.loading = false;
+		$scope.error = true;
+		$scope.errorMessage = "Oh snap! Something went wrong, please try again";
+	}
+	
+  })
+  .controller('CreateprojectTaskCtrl', function ($scope,ProjectService,$rootScope,$routeParams) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+	
+    var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+
+    if(typeof token == "undefined" || token == null){
+  	  $location.path("/login");
+    }
+
+    $rootScope.session = true;
+	$scope.success = false;
+	$scope.error = false;
+	
+	$scope.save = function(task){
+		
+        var hasErrors = false;
+        if (!task || !task.title) {
+            angular.element('#taskTitle').parent().addClass('has-error');
+            angular.element('#taskTitle').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#taskTitle').parent().removeClass('has-error');
+            angular.element('#taskTitle').siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!angular.element('#duedate').val()) {
+            angular.element('#duedate').parent().parent().addClass('has-error');
+            angular.element('#duedate').parent().siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#duedate').parent().parent().removeClass('has-error');
+            angular.element('#duedate').parent().siblings('.help-block').addClass('ng-hide');
+        }
+		
+        if (!task || !task.hours) {
+            angular.element('#taskHours').parent().addClass('has-error');
+            angular.element('#taskHours').siblings('.help-block').removeClass('ng-hide');
+            hasErrors = true;
+        } else {
+            angular.element('#taskHours').parent().removeClass('has-error');
+            angular.element('#taskHours').siblings('.help-block').addClass('ng-hide');
+        }
+		
+
+        if (hasErrors) {
+            return false;
+        }else{
+			task.dueDate = angular.element('#duedate').val();
+			task.pk = $routeParams.id;
+			$scope.loading = true;
+			$scope.message = "Please wait";
+        	ProjectService.CreateTask(task).then(TaskSuccess,ProjectsError);
+        }
+			
+	}
+	
+	function TaskSuccess(response){
+		
+		if(response.status == 201 || response.status == 200){
+			$scope.loading = false;
+			$scope.success = true;
+			$scope.task = {};
+		    angular.element('#duedate').val("");
+			$scope.successMessage = "Task successfully created";
+		}else{
+			$scope.loading = false;
+			$scope.error = true;
+			$scope.errorMessage = "Oh snap! Something went wrong, please try again";
+		}
+		
+	}
+	
+	function ProjectsError(error){
+		$scope.loading = false;
+		$scope.error = true;
+		$scope.errorMessage = "Oh snap! Something went wrong, please try again";
+	}
+	
   });
-  
+ 

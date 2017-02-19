@@ -21,6 +21,8 @@
                                         <th>Title</th>
                                         <th>Due Date</th>
                                         <th>Estimated Hours</th>
+										<!-- <th>Edit</th> -->
+										<th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,6 +31,8 @@
                                         <td>{{task.title }}</td>
                                         <td>{{task.due_date}}</td>
                                         <td>{{task.estimated_hours}}</td>
+										<!-- <td><i class="material-icons edit-icon" ng-click="edit(project)">mode_edit</i></td> -->
+										<td><i class="material-icons delete-icon" ng-click="delete()">delete_forever</i></td>
                                     </tr>
 	
                                 </tbody>
@@ -40,7 +44,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
-							<!-- <button ng-click="addTask()" class="btn btn-primary margin-t" type="button">Add Task</button> -->
+							<button ng-click="addTask()" class="btn btn-primary margin-t" type="button">Add Task</button> 
                         </div>
                     </div>
                 </div>
