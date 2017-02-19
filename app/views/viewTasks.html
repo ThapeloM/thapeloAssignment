@@ -1,7 +1,9 @@
+<request-pending ng-model="loading" message="message"></request-pending>
 <div class="input">
     <form class="form-horizontal styledContainer">
         <div class="conter-wrapper ">
             <div class="row">
+				<div class="alert alert-warning" role="alert" ng-if="info">{{infoMessage}}</div>
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">

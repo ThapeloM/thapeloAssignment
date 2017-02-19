@@ -1,5 +1,8 @@
+<request-pending ng-model="loading" message="message"></request-pending>
 <div class="input">
     <div class="col-md-12 margin-tb">
+		<div class="alert alert-success" role="alert" ng-if="success">{{successMessage}}</div>
+		<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Edit Project</h3>
@@ -28,8 +31,9 @@
 	                      </span>
 	                  </span>
 	              </div>
+				  	<span class="help-block ng-hide">Please enter start date</span>
 	          </div>
-				<span class="help-block ng-hide">Please enter start date</span>
+			
 			 </div>
 			 
 			  <div class="login-input-group">
@@ -43,8 +47,9 @@
 		                      </span>
 		                  </span>
 		              </div>
+					  <span class="help-block ng-hide">Please enter end date</span>
 		          </div>
-				<span class="help-block ng-hide">Please enter end date</span>
+				
 			  </div>
 			  
 			  <div class="container">

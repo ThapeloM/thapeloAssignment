@@ -17,6 +17,8 @@ angular.module('thapeloAssignmentApp')
 	
 	$scope.loading = true;
 	$scope.message = "loading";
+	$scope.success = false;
+	$scope.error = false;
 	
 	
 	//get project list
@@ -35,6 +37,8 @@ angular.module('thapeloAssignmentApp')
 	
 	//delete project
 	$scope.delete = function(id){
+		$scope.loading = true;
+		$scope.message = "Please wait";
 		ProjectService.DeleteProject(id).then(DeleteSuccess,ProjectsError);
 	}
 	
@@ -43,19 +47,22 @@ angular.module('thapeloAssignmentApp')
             $scope.projects = response.data;
             $scope.rowCollection = $scope.projects;
 			$scope.loading = false;
+			
 		}
 	}
 	
 	function DeleteSuccess(response){
 		if(response.status == 204){
-            $window.location.reload();
-			
+			$scope.success = true;
+			$scope.successMessage = "Project successfully deleted";
+            $window.location.reload();	
 		}
 	}
 	
 	function ProjectsError(error){
-		console.log(error)
 		$scope.loading = false;
+		$scope.error = true;
+		scope.errorMessage = "Oh snap! Something went wrong, please try again";
 	}
 	
 	$scope.addProject = function(){
@@ -72,11 +79,16 @@ angular.module('thapeloAssignmentApp')
       'Karma'
     ];
 		
+	
 	var id = $routeParams.id;
 	$scope.tasks = [];
+	$scope.loading = true;
+	$scope.message = "loading";
+	$scope.info = false;
 	ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
 
 	function TasksSuccess(response){
+		$scope.loading = false;
 		if(response.status == 200){
 			$scope.projectName = response.data.project_data.title;
             $scope.tasks.push(response.data);
@@ -84,7 +96,9 @@ angular.module('thapeloAssignmentApp')
 	}
 	
 	function ProjectsError(error){
-		console.log(error)
+		$scope.loading = false;
+		$scope.info = true;
+		$scope.infoMessage = "No Tasks available"
 	}
 	
 	$scope.addTask = function(){
@@ -100,7 +114,8 @@ angular.module('thapeloAssignmentApp')
       'Karma'
     ];
 
-
+	$scope.success = false;
+	$scope.error = false;
 	$scope.projectDetails = JSON.parse($window.localStorage.getItem('project'));
 	
 	if($scope.projectDetails.is_billable){
@@ -142,22 +157,22 @@ angular.module('thapeloAssignmentApp')
             angular.element('#description').siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.start_date) {
-            angular.element('#startdate').parent().addClass('has-error');
-            angular.element('#startdate').siblings('.help-block').removeClass('ng-hide');
+        if (!angular.element('#startdate').val()) {
+            angular.element('#startdate').parent().parent().addClass('has-error');
+            angular.element('#startdate').parent().siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
         } else {
-            angular.element('#startdate').parent().removeClass('has-error');
-            angular.element('#startdate').siblings('.help-block').addClass('ng-hide');
+            angular.element('#startdate').parent().parent().removeClass('has-error');
+            angular.element('#startdate').parent().siblings('.help-block').addClass('ng-hide');
         }
 		
-        if (!project || !project.end_date) {
-            angular.element('#enddate').parent().addClass('has-error');
-            angular.element('#enddate').siblings('.help-block').removeClass('ng-hide');
+        if (!angular.element('#enddate').val()) {
+            angular.element('#enddate').parent().parent().addClass('has-error');
+            angular.element('#enddate').parent().siblings('.help-block').removeClass('ng-hide');
             hasErrors = true;
         } else {
-            angular.element('#enddate').parent().removeClass('has-error');
-            angular.element('#enddate').siblings('.help-block').addClass('ng-hide');
+            angular.element('#enddate').parent().parent().removeClass('has-error');
+            angular.element('#enddate').parent().siblings('.help-block').addClass('ng-hide');
         }
 		
         if (!project || !project.is_billable) {
@@ -182,6 +197,11 @@ angular.module('thapeloAssignmentApp')
         if (hasErrors) {
             return false;
         }else{
+			
+			project.start_date = angular.element('#startdate').val();
+			project.end_date = angular.element('#enddate').val();
+			$scope.loading = true;
+			$scope.message = "Please wait";
         	ProjectService.EditProject(project).then(ProjetsSuccess,ProjectsError);
         }
 			
@@ -190,10 +210,15 @@ angular.module('thapeloAssignmentApp')
 	function ProjetsSuccess(response){		
 		if(response.status == 200){
 			$window.localStorage.setItem('project', JSON.stringify(response.data));
+			$scope.loading = false;
+			$scope.success = true;
+			$scope.successMessage = "Project successfully updated";
 		}
 	}
 	function ProjectsError(error){
-		console.log(error)
+		$scope.loading = false;
+		$scope.error = true;
+		$scope.errorMessage = "Oh snap! Something went wrong, please try again";
 	}
 	
 	$scope.addProject = function(){

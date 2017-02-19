@@ -100,7 +100,7 @@ angular.module('thapeloAssignmentApp')
      			  title: project.title,
      			  description: project.description,
      			  start_date: project.start_date,
-     			  end_date: project.start_date,
+     			  end_date: project.end_date,
      			  is_billable: project.is_billable,
      			  is_active: project.is_active
      		  }

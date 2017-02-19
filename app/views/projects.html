@@ -3,19 +3,20 @@
     <form class="form-horizontal styledContainer">
         <div class="conter-wrapper ">
             <div class="row">
+				<div class="alert alert-success" role="alert" ng-if="success">{{successMessage}}</div>
+				<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">Project List
                     </h3>
                         </div>
-                        <div class="search_container">
-                <input type="text" class="search" placeholder="search" ng-model="query" />
-                <span class="glyphicon glyphicon-search search-icon" aria-hidden="true"></span>
-            </div>
                         <div class="panel-body">
                             <table class="table table-hover" st-safe-src="rowCollection" st-table="projects">
                                 <thead>
+									<tr>
+									 <th colspan="2"><input st-search="" class="form-control" placeholder="search ..." type="text"/></th>
+								   </tr>
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
@@ -44,9 +45,9 @@
                                             <div class="status success" ng-if="project.is_active"></div>
                                             <div class="status failed" ng-if="!project.is_active"></div>
                                         </td>
-										<td><i class="material-icons" ng-click="view(project.pk)">view_agenda</i></td>
-										<td><i class="material-icons" ng-click="edit(project)">mode_edit</i></td>
-										<td><i class="material-icons" ng-click="delete(project.pk)">delete_forever</i></td>
+										<td><i class="material-icons view-icon" ng-click="view(project.pk)">view_agenda</i></td>
+										<td><i class="material-icons edit-icon" ng-click="edit(project)">mode_edit</i></td>
+										<td><i class="material-icons delete-icon" ng-click="delete(project.pk)">delete_forever</i></td>
                                     </tr>
 	
                                 </tbody>

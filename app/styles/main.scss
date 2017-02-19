@@ -106,7 +106,7 @@ body {
 .search_container{
 	position: absolute;
 	    right: 30px;
-	    top: 45px;
+	    top: 55px;
 		input{
 			border: 1px solid #ccc;
 			    border-radius: 5px;
@@ -117,6 +117,10 @@ body {
 		    right: 25px;
 		    top: 3px;
 		}
+}
+
+.table > thead > tr > th {
+  color: black;
 }
 
 li {
@@ -222,6 +226,15 @@ li {
   z-index: 2;
 }
 
+.delete-icon{
+	color: red;
+}
+.view-icon{
+	color: black;
+}
+.edit-icon{
+	color: blue;
+}
 .textCenter{
 	text-align: center;
 }

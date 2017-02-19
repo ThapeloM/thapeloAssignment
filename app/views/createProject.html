@@ -1,7 +1,9 @@
-<pageheader pagename="Add Project" subtitle="This is where you add your shops" text="Back" icon="fa fa-arrow-circle-o-left" click-fn="back()">
+<request-pending ng-model="loading" message="message"></request-pending>
 </pageheader>
 <div class="input">
     <div class="col-md-12 margin-tb">
+		<div class="alert alert-success" role="alert" ng-if="success">{{successMessage}}</div>
+		<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Add Project</h3>
@@ -22,12 +24,10 @@
 				
 			  <div class="login-input-group">
                 <div class="form-group">
-                    <label class="LabelColorBlack">Start date</label>
-                    <!-- <input type="text" class=" form-control textColorBlack" placeholder="Start Date" aria-describedby="basic-addon2" name="startDate" ng-model='project.startDate' id="startdate"> -->
-					
+                    <label class="LabelColorBlack">Start date</label>					
 	  	          <div class="form-group">
 	  	              <div class='input-group date' id='datetimepicker4'>
-	  	                 <input type='text' class="form-control" placeholder="Start Date" ng-model='project.startDate' id="startdate" />
+	  	                 <input type='text' class="form-control" placeholder="Start Date" ng-model="project.startDate" id="startdate" />
 	  	                  <span class="input-group-addon">
 	  	                      <span class="glyphicon glyphicon-calendar">
 	  	                      </span>
@@ -35,15 +35,12 @@
 	  	              </div>
 					  <span class="help-block ng-hide">Please enter start date</span>
 	  	          </div>
-                    
                 </div>
 			 </div>
 			 
 			  <div class="login-input-group">
                 <div class="form-group">
                     <label class="LabelColorBlack">End date</label>
-                    <!-- <input type="text" class=" form-control textColorBlack" placeholder="End Date" aria-describedby="basic-addon2" name="end date" ng-model='project.endDate' id="enddate"> -->
-					
   		          <div class="form-group">
   		              <div class='input-group date' id='datetimepicker5'>
   		                  <input type='text' class="form-control" placeholder="End Date" ng-model="data.endDate" id="enddate"/>
