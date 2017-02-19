@@ -1,0 +1,56 @@
+<request-pending ng-model="loading" message="message"></request-pending>
+<div class="input">
+    <form class="form-horizontal styledContainer">
+        <div class="conter-wrapper ">
+            <div class="row">
+				<div class="alert alert-warning" role="alert" ng-if="info">{{infoMessage}}</div>
+				<div class="alert alert-success" role="alert" ng-if="success">{{successMessage}}</div>
+				<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{projectName}} Tasks
+                    </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover" st-safe-src="rowCollection" st-table="tasks">
+                                <thead>
+ 									<tr>
+ 									 <th colspan="2"><input st-search="" class="form-control" placeholder="search ..." type="text"/></th>
+ 								   </tr>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Due Date</th>
+                                        <th>Estimated Hours</th>
+										<!-- <th>Edit</th> -->
+										<th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(id, task) in tasks | orderBy:'id' | filter: search" style="text-align: left;">
+                                        <td>{{task.id}}</td>
+                                        <td>{{task.title }}</td>
+                                        <td>{{task.due_date}}</td>
+                                        <td>{{task.estimated_hours}}</td>
+										<!-- <td><i class="material-icons edit-icon" ng-click="edit(project)">mode_edit</i></td> -->
+										<td><i class="material-icons delete-icon" ng-click="delete()">delete_forever</i></td>
+                                    </tr>
+	
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="7" class="textCenter">
+                                            <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+							<button ng-click="addTask()" class="btn btn-primary margin-t" type="button">Add Task</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

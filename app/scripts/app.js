@@ -17,21 +17,48 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+	'alexjoffroy.angular-loaders',
+	'smart-table'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+	  .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/projects', {
+        templateUrl: 'views/projects.html',
+        controller: 'ProjectsCtrl',
+      })
+      .when('/createproject', {
+        templateUrl: 'views/createProject.html',
+        controller: 'CreateprojectCtrl',
+      })
+      .when('/viewprojecttasks', {
+        templateUrl: 'views/viewTasks.html',
+        controller: 'ViewProjectTasksCtrl'
+      })
+      .when('/editproject', {
+        templateUrl: 'views/editProject.html',
+        controller: 'EditProjectCtrl'
+      })
+      .when('/createtask', {
+        templateUrl: 'views/createTask.html',
+        controller: 'CreateprojectTaskCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
+	  
   });

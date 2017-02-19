@@ -12,6 +12,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 body {
   padding: 0;
+  background-color: white;
+  color: #999;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -20,6 +22,11 @@ body {
 .footer {
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.container.table {
+    max-width: 90%;
+    width: 90%;
 }
 
 /* Custom page header */
@@ -64,6 +71,194 @@ body {
 
   p + h4 {
     margin-top: 28px;
+  }
+}
+
+#loginbox {
+    margin-top: 30px;
+}
+
+#loginbox > div:first-child {        
+    padding-bottom: 10px;    
+}
+
+.iconmelon {
+    display: block;
+    margin: auto;
+}
+
+.status {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}
+
+.status.warn {
+  background: #ffa225;
+}
+.status.failed {
+  background: #fb1c1c;
+}
+.status.success {
+  background: #3bc507;
+}
+
+.search_container{
+	position: absolute;
+	    right: 30px;
+	    top: 55px;
+		input{
+			border: 1px solid #ccc;
+			    border-radius: 5px;
+			    padding: 5px
+		}
+		span{
+		    color: #ccc;
+		    right: 25px;
+		    top: 3px;
+		}
+}
+
+.table > thead > tr > th {
+  color: black;
+}
+
+li {
+  list-style-type: none;
+}
+
+#form > div {
+    margin-bottom: 25px;
+}
+
+#form > div:last-child {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.panel {    
+    background-color: transparent;
+}
+
+.panel-body {
+    padding-top: 30px;
+    background-color: rgba(2555,255,255,.3);
+	overflow: scroll;
+}
+
+#particles {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;                        
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: -2;
+}
+
+.iconmelon,
+.im {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: block;
+  fill: #525151;
+}
+
+.iconmelon:after,
+.im:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.spinner-container {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.23);
+  z-index: 2001;
+  display: table;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+}
+
+
+.spinner{
+  position: absolute;
+  top: 48%;
+  left: 0;
+  right: 0;
+  z-index: 2001;
+  width: 40px;
+  background: #fff;
+  height: 40px;
+  margin: auto;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+.spinner-label {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  top: 40px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  z-index: 2000;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.23);
+  z-index: 2;
+}
+
+.delete-icon{
+	color: red;
+}
+.view-icon{
+	color: black;
+}
+.edit-icon{
+	color: blue;
+}
+.textCenter{
+	text-align: center;
+}
+
+.m-r-10{
+	margin-right: 10px;
+}
+
+.m-r-15{
+	margin-right: 15px;
+}
+
+@keyframes sk-rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
 }
 
