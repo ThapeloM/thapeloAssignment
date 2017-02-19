@@ -78,7 +78,7 @@ angular.module('thapeloAssignmentApp')
 	
   })
   
-  .controller('ViewProjectTasksCtrl', function (ProjectService, $scope, $location,$routeParams,$rootScope) {
+  .controller('ViewProjectTasksCtrl', function (ProjectService, $scope, $location,$routeParams,$rootScope,$window) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -100,6 +100,8 @@ angular.module('thapeloAssignmentApp')
 	ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
 	
 	$scope.delete = function(){
+		$scope.loading = true;
+		$scope.message = "loading";
 		ProjectService.DeleteTask(id).then(DeleteSuccess,DeleteError);
 	}
 
@@ -118,9 +120,10 @@ angular.module('thapeloAssignmentApp')
 	}
 	
 	function DeleteSuccess(response){
+		$scope.loading = false;
 		if(response.status == 204){
 			$scope.success = true;
-			$scope.successMessage = "Project successfully deleted";
+			$scope.successMessage = "Task successfully deleted";
             $window.location.reload();	
 		}
 	}

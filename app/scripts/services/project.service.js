@@ -19,6 +19,7 @@ angular.module('thapeloAssignmentApp')
 		  this.DeleteProject = DeleteProject;
 		  this.ViewTasks = ViewTasks;
 		  this.EditProject = EditProject;
+		  this.DeleteTask = DeleteTask;
 		  
 		  function Projects() {
 			  
