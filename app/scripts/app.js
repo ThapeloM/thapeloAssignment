@@ -35,7 +35,7 @@ angular
         templateUrl: 'views/projects.html',
         controller: 'ProjectsCtrl',
       })
-      .when('/createproject', {
+      .when('/createEditproject', {
         templateUrl: 'views/createProject.html',
         controller: 'CreateprojectCtrl',
       })

@@ -64,10 +64,10 @@ angular.module('thapeloAssignmentApp')
    		    var project = {
    			    title: project.title,
    			    description: project.description,
-   			    start_date: project.startDate,
-   			    end_date: project.endDate,
-   			    is_billable: project.billable,
-   			    is_active: project.active
+   			    start_date: project.start_date,
+   			    end_date: project.end_date,
+   			    is_billable: project.is_billable,
+   			    is_active: project.is_active
    		    }
 		  
             var dfd = $q.defer();

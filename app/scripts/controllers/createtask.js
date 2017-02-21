@@ -8,7 +8,7 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('CreatetaskCtrl', function ($scope,ProjectService,$rootScope,$routeParams) {
+  .controller('CreatetaskCtrl', function ($scope,ProjectService,$rootScope,$routeParams,$location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -20,7 +20,20 @@ angular.module('thapeloAssignmentApp')
     if(typeof token == "undefined" || token == null){
   	  $location.path("/login");
     }
-
+	
+    var existingtask = JSON.parse(window.localStorage.getItem('task'));
+  
+    if(typeof existingtask == "undefined" || existingtask == null){
+		$scope.addMode = true;
+    }
+	
+	// assigin values for edit mode
+	if(!$scope.addMode){
+		$scope.task = existingtask;
+	}
+	
+	
+    $scope.addMode = true;
     $rootScope.session = true;
 	$scope.success = false;
 	$scope.error = false;

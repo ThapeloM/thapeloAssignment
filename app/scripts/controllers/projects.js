@@ -25,6 +25,11 @@ angular.module('thapeloAssignmentApp')
 	//get project list
 	ProjectService.Projects().then(ProjetsSuccess,ProjectsError);
 	
+	//create a project
+	$scope.addProject = function(){
+		$location.path('/createEditproject');
+	}
+	
 	//view tasks
 	$scope.view = function(project){
 		$window.localStorage.setItem('projecttasks', JSON.stringify(project));
@@ -34,7 +39,7 @@ angular.module('thapeloAssignmentApp')
 	//edit project
 	$scope.edit = function(project){
 		$window.localStorage.setItem('project', JSON.stringify(project));
-		$location.path('/editproject');
+		$location.path('/createEditproject');
 	}
 	
 	//delete project
@@ -65,10 +70,6 @@ angular.module('thapeloAssignmentApp')
 		$scope.loading = false;
 		$scope.error = true;
 		scope.errorMessage = "Oh snap! Something went wrong, please try again";
-	}
-	
-	$scope.addProject = function(){
-		$location.path('/createproject');
 	}
 	
 });

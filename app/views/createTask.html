@@ -6,7 +6,8 @@
 		<div class="alert alert-danger" role="alert" ng-if="error">{{errorMessage}}</div>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Add Task</h3>
+                <h3 class="panel-title" ng-if="addMode">Add Task</h3>
+				<h3 class="panel-title" ng-if="!addMode">Edit Task</h3>
             </div>
             <div class="panel-body form-group">
                 <div class="form-group">
@@ -40,7 +41,8 @@
 			  </div>
 			  				
 				<br>
-                <button ng-click="save(task)" class="btn btn-primary margin-t" type="button">Add Task</button>
+                <button ng-click="save(task)" class="btn btn-primary margin-t" type="button" ng-if="addMode">Add Task</button>
+				<button ng-click="save(task)" class="btn btn-primary margin-t" type="button" ng-if="!addMode">Edit Task</button>
 
             </div>
         </div>
