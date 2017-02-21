@@ -8,6 +8,12 @@
  *
  * Main module of the application.
  */
+
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function($window) {
+  return $window._; 
+}]);
+  
 angular
   .module('thapeloAssignmentApp', [
     'ngAnimate',
@@ -19,46 +25,37 @@ angular
     'ngSanitize',
     'ngTouch',
 	'alexjoffroy.angular-loaders',
-	'smart-table'
+	'smart-table',
+	'underscore'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
 	  .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/projects', {
-        templateUrl: 'views/projects.html',
+        templateUrl: 'views/viewprojects.html',
         controller: 'ProjectsCtrl',
       })
-      .when('/createproject', {
-        templateUrl: 'views/createProject.html',
+      .when('/createEditproject', {
+        templateUrl: 'views/createEditProject.html',
         controller: 'CreateprojectCtrl',
       })
-      .when('/viewprojecttasks', {
+      .when('/viewtasks', {
         templateUrl: 'views/viewTasks.html',
-        controller: 'ViewProjectTasksCtrl'
-      })
-      .when('/editproject', {
-        templateUrl: 'views/editProject.html',
-        controller: 'EditProjectCtrl'
+        controller: 'ViewtaskCtrl'
       })
       .when('/createtask', {
         templateUrl: 'views/createTask.html',
-        controller: 'CreateprojectTaskCtrl'
+        controller: 'CreatetaskCtrl'
       })
-      .otherwise({
+      	.otherwise({
         redirectTo: '/'
       });
 	  
-  });
+});

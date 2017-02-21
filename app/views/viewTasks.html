@@ -13,7 +13,7 @@
                     </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-hover" st-safe-src="rowCollection" st-table="tasks">
+                            <table class="table table-hover" st-safe-src="rowCollection" st-table="projecTasks">
                                 <thead>
  									<tr>
  									 <th colspan="2"><input st-search="" class="form-control" placeholder="search ..." type="text"/></th>
@@ -28,13 +28,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="(id, task) in tasks | orderBy:'id' | filter: search" style="text-align: left;">
+                                    <tr ng-repeat="(id, task) in projecTasks | orderBy:'id' | filter: search" style="text-align: left;">
                                         <td>{{task.id}}</td>
                                         <td>{{task.title }}</td>
                                         <td>{{task.due_date}}</td>
                                         <td>{{task.estimated_hours}}</td>
 										<!-- <td><i class="material-icons edit-icon" ng-click="edit(project)">mode_edit</i></td> -->
-										<td><i class="material-icons delete-icon" ng-click="delete()">delete_forever</i></td>
+										<td><i class="material-icons delete-icon" ng-click="delete(task.id)">delete_forever</i></td>
                                     </tr>
 	
                                 </tbody>

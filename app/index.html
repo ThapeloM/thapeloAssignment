@@ -40,7 +40,7 @@
 
             <ul class="nav navbar-nav">
 			  <li class="active"><a ng-href="#!/projects">Projects</a></li>
-			  <li><a ng-href="#!/logout" ng-click="logout()">Logout</a></li>
+			  <li><a ng-href="#!/logout" >Logout</a></li>
             </ul>
           </div>
         </div>
@@ -86,19 +86,22 @@
     <script src="bower_components/angular-loaders/dist/angular-loaders.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+   
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/services/user.service.js"></script>
         <script src="scripts/services/project.service.js"></script>
-        <script src="scripts/controllers/projects.js"></script>
+        <script src="scripts/controllers/viewprojects.js"></script>
         <script src="scripts/directives/requestpending.js"></script>
 		 <script src="scripts/directives/smart-table.js"></script>
+		<script src="scripts/directives/underscore.js"></script>
+        <script src="scripts/controllers/viewtask.js"></script>
+        <script src="scripts/controllers/createproject.js"></script>
+        <script src="scripts/controllers/createtask.js"></script>
         <!-- endbuild -->
 </body>
 </html>

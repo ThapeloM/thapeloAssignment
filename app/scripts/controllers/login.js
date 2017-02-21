@@ -10,13 +10,13 @@
 angular.module('thapeloAssignmentApp')
   .controller('LoginCtrl', function ($scope, $location, UserService, $rootScope) {
 	
-	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
-	if(typeof token == "undefined" || token == null){
-	 	  $rootScope.session = false;
-    }else{
-    	$rootScope.session = true;
-		$location.path('/projects');
-    }
+	
+  	window.localStorage.removeItem('TrustedToken');
+  	window.localStorage.removeItem('project');
+	window.localStorage.removeItem('projecttasks');
+  	$rootScope.session = false;
+	$location.search('id', null)
+	
 	$scope.error = false;
 	$scope.login = function(){
 			
@@ -60,4 +60,4 @@ angular.module('thapeloAssignmentApp')
 			$scope.errorMessage = "Unable to login with provided credentials.";
 		}
 	}
-  });
+});
