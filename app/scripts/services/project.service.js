@@ -43,7 +43,6 @@ angular.module('thapeloAssignmentApp')
 
 	        $http(request).then(function (response) {
 	            var data = response;
-			 console.log(data);
 	            dfd.resolve(data);
 	        }, function (err) {
 	            dfd.reject(err);
@@ -238,7 +237,7 @@ angular.module('thapeloAssignmentApp')
 		  
 	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
 	    	if(typeof token == "undefined" || token == null){
-	    	 	  $location.path("/login");
+	    	 	$location.path("/login");
 	   	    }
 
 	        var dfd = $q.defer();
