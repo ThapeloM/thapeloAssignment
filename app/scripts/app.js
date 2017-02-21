@@ -32,11 +32,6 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/projects', {
         templateUrl: 'views/projects.html',
         controller: 'ProjectsCtrl',
@@ -47,15 +42,15 @@ angular
       })
       .when('/viewprojecttasks', {
         templateUrl: 'views/viewTasks.html',
-        controller: 'ViewProjectTasksCtrl'
+        controller: 'ViewtaskCtrl'
       })
       .when('/editproject', {
         templateUrl: 'views/editProject.html',
-        controller: 'EditProjectCtrl'
+        controller: 'EditprojectCtrl'
       })
       .when('/createtask', {
         templateUrl: 'views/createTask.html',
-        controller: 'CreateprojectTaskCtrl'
+        controller: 'CreatetaskCtrl'
       })
       .otherwise({
         redirectTo: '/'
