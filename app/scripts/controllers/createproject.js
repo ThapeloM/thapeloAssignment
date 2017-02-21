@@ -113,10 +113,13 @@ angular.module('thapeloAssignmentApp')
 			$scope.loading = true;
 			$scope.message = "Please wait";
 			if($scope.addMode){
+				console.log(project)
 				ProjectService.CreateProjects(project).then(ProjectSuccess,ProjectsError);
 			}else{
 				project.start_date = angular.element('#startdate').val();
 				project.end_date = angular.element('#enddate').val();
+				
+				console.log(project)
 	        	ProjectService.EditProject(project).then(ProjectSuccess,ProjectsError);
 			}
         	
@@ -151,4 +154,4 @@ angular.module('thapeloAssignmentApp')
 		$scope.errorMessage = "Oh snap! Something went wrong, please try again";
 	}
 	
-  });
+});

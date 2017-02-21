@@ -8,6 +8,12 @@
  *
  * Main module of the application.
  */
+
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function($window) {
+  return $window._; 
+}]);
+  
 angular
   .module('thapeloAssignmentApp', [
     'ngAnimate',
@@ -19,7 +25,8 @@ angular
     'ngSanitize',
     'ngTouch',
 	'alexjoffroy.angular-loaders',
-	'smart-table'
+	'smart-table',
+	'underscore'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -32,11 +39,11 @@ angular
         controller: 'LoginCtrl'
       })
       .when('/projects', {
-        templateUrl: 'views/projects.html',
+        templateUrl: 'views/viewprojects.html',
         controller: 'ProjectsCtrl',
       })
       .when('/createEditproject', {
-        templateUrl: 'views/createProject.html',
+        templateUrl: 'views/createEditProject.html',
         controller: 'CreateprojectCtrl',
       })
       .when('/viewtasks', {

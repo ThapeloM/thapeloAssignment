@@ -10,9 +10,8 @@
 angular.module('thapeloAssignmentApp')
 .service('ProjectService', ProjectService);
 	
-	
 	  // get list of projects
-    function ProjectService($http, $q, $location) {
+    function ProjectService($http, $q, $location,_,$window) {
           
 		this.Projects = Projects;
 		this.CreateProjects = CreateProjects;
@@ -21,6 +20,7 @@ angular.module('thapeloAssignmentApp')
 		this.ViewTasks = ViewTasks;
 		this.EditProject = EditProject;
 		this.DeleteTask = DeleteTask;
+		this.GetAProject = GetAProject;
 		  
 		function Projects() {
 			  
@@ -50,8 +50,8 @@ angular.module('thapeloAssignmentApp')
 
 	        return dfd.promise;
 	}
-		
-		
+	
+	
 	//create a project
   	function CreateProjects(project) {
 		  
@@ -260,6 +260,36 @@ angular.module('thapeloAssignmentApp')
 
 	   		return dfd.promise;
 	}
+	
+	//get a project
+	function GetAProject(id) {
+		  
+	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+	    	if(typeof token == "undefined" || token == null){
+	    	 	$location.path("/login");
+	   	    }
+
+	        var dfd = $q.defer();
+	        var request = {};
+	        var url = "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + id + "/";
+
+	        request.method = "GET";
+	        request.url = url;
+	        request.headers = {
+	    			'content-type':'application/json',
+	    		    'Authorization':'Token ' + token.token
+	    	};
+
+	        $http(request).then(function (response) {
+	            var data = response;
+	            dfd.resolve(data);
+	        }, function (err) {
+	            dfd.reject(err);
+	        });
+
+	        return dfd.promise;
+	}
+	
 }
 	
 	

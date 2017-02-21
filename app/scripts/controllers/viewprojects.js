@@ -20,7 +20,7 @@ angular.module('thapeloAssignmentApp')
 	$scope.success = false;
 	$scope.error = false;
 	$rootScope.session = true;
-	
+	$location.search('id', null)
 	
 	//get project list
 	ProjectService.Projects().then(ProjetsSuccess,ProjectsError);
@@ -31,9 +31,9 @@ angular.module('thapeloAssignmentApp')
 	}
 	
 	//view tasks
-	$scope.view = function(project){
+	$scope.view = function(id,project){
 		$window.localStorage.setItem('projecttasks', JSON.stringify(project));
-		$location.path('/viewtasks');
+		$location.path('/viewtasks').search({id: id});
 	}
 	
 	//edit project
@@ -62,7 +62,7 @@ angular.module('thapeloAssignmentApp')
 		if(response.status == 204){
 			$scope.success = true;
 			$scope.successMessage = "Project successfully deleted";
-            $window.location.reload();	
+            ProjectService.Projects().then(ProjetsSuccess,ProjectsError);	
 		}
 	}
 	

@@ -90,4 +90,4 @@ angular.module('thapeloAssignmentApp')
 		$scope.errorMessage = "Oh snap! Something went wrong, please try again";
 	}
 	
-  });
+});

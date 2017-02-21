@@ -13,7 +13,9 @@ angular.module('thapeloAssignmentApp')
 	
   	window.localStorage.removeItem('TrustedToken');
   	window.localStorage.removeItem('project');
+	window.localStorage.removeItem('projecttasks');
   	$rootScope.session = false;
+	$location.search('id', null)
 	
 	$scope.error = false;
 	$scope.login = function(){

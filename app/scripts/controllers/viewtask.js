@@ -8,7 +8,7 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('ViewtaskCtrl', function (ProjectService, $scope, $location,$rootScope,$window) {
+  .controller('ViewtaskCtrl', function (ProjectService, $scope, $location,$rootScope,$window, $routeParams) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -23,17 +23,13 @@ angular.module('thapeloAssignmentApp')
 
 	$scope.info = false;
 	$rootScope.session = true;
+	$scope.loading = true;
+	$scope.success = false;
+	$scope.message = "loading";
+	var projectID = $routeParams.id;
 	
-	var projectDetails = JSON.parse($window.localStorage.getItem('projecttasks'));
-	
-	if(projectDetails.task_set.length > 0){
-		$scope.projecTasks = projectDetails.task_set;
-		$scope.rowCollection = $scope.projecTasks;
-	}else{
-		$scope.info = true;
-		$scope.infoMessage = "No Tasks available"
-	}
-	
+	ProjectService.GetAProject(projectID).then(ProjetsSuccess,ProjectsError);
+
 
 	$scope.delete = function(id){
 		$scope.loading = true;
@@ -46,7 +42,7 @@ angular.module('thapeloAssignmentApp')
 		if(response.status == 204){
 			$scope.success = true;
 			$scope.successMessage = "Task successfully deleted";
-            $window.location.reload();	
+			ProjectService.GetAProject(projectID).then(ProjetsSuccess,ProjectsError);
 		}
 	}
 	
@@ -56,6 +52,24 @@ angular.module('thapeloAssignmentApp')
 		scope.errorMessage = "Oh snap! Something went wrong, please try again";
 	}
 	
+	function ProjetsSuccess(response){
+		if(response.status == 200){
+			if(response.data.task_set.length > 0){
+				$scope.projecTasks = response.data.task_set;
+				$scope.rowCollection = $scope.projecTasks;
+			}else{
+				$scope.info = true;
+				$scope.infoMessage = "No Tasks available"
+			}
+			$scope.loading = false;			
+		}
+	}
+		
+	function ProjectsError(error){
+		$scope.loading = false;
+		$scope.error = true;
+		scope.errorMessage = "Oh snap! Something went wrong, please try again";
+	}
 	
 	$scope.addTask = function(){
 		$location.path('/createtask');
