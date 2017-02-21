@@ -60,4 +60,4 @@ angular.module('thapeloAssignmentApp')
 			$scope.errorMessage = "Unable to login with provided credentials.";
 		}
 	}
-  });
+});

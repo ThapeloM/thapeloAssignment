@@ -54,8 +54,8 @@ angular
         templateUrl: 'views/createTask.html',
         controller: 'CreatetaskCtrl'
       })
-      .otherwise({
+      	.otherwise({
         redirectTo: '/'
       });
 	  
-  });
+});
