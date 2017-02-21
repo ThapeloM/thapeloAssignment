@@ -132,9 +132,4 @@ angular.module('thapeloAssignmentApp')
 		$location.path('/createproject');
 	}
 	
-	$scope.logout = function(){
-		window.localStorage.removeItem('TrustedToken');
-		$location.path('/login');
-	}
-	
   });

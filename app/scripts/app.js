@@ -24,9 +24,8 @@ angular
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
 	  .when('/login', {
         templateUrl: 'views/login.html',
@@ -40,7 +39,7 @@ angular
         templateUrl: 'views/createProject.html',
         controller: 'CreateprojectCtrl',
       })
-      .when('/viewprojecttasks', {
+      .when('/viewtasks', {
         templateUrl: 'views/viewTasks.html',
         controller: 'ViewtaskCtrl'
       })

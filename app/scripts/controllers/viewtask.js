@@ -8,7 +8,7 @@
  * Controller of the thapeloAssignmentApp
  */
 angular.module('thapeloAssignmentApp')
-  .controller('ViewtaskCtrl', function (ProjectService, $scope, $location,$routeParams,$rootScope,$window) {
+  .controller('ViewtaskCtrl', function (ProjectService, $scope, $location,$rootScope,$window) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -20,34 +20,27 @@ angular.module('thapeloAssignmentApp')
     if(typeof token == "undefined" || token == null){
   	  $location.path("/login");
     }
-	var id = $routeParams.id;
-	$scope.tasks = [];
-	$scope.loading = true;
-	$scope.message = "loading";
+
 	$scope.info = false;
 	$rootScope.session = true;
-	ProjectService.ViewTasks(id).then(TasksSuccess,ProjectsError);
 	
-	$scope.delete = function(){
+	var projectDetails = JSON.parse($window.localStorage.getItem('projecttasks'));
+	
+	if(projectDetails.task_set.length > 0){
+		$scope.projecTasks = projectDetails.task_set;
+		$scope.rowCollection = $scope.projecTasks;
+	}else{
+		$scope.info = true;
+		$scope.infoMessage = "No Tasks available"
+	}
+	
+
+	$scope.delete = function(id){
 		$scope.loading = true;
 		$scope.message = "loading";
 		ProjectService.DeleteTask(id).then(DeleteSuccess,DeleteError);
 	}
 
-	function TasksSuccess(response){
-		$scope.loading = false;
-		if(response.status == 200){
-			$scope.projectName = response.data.project_data.title;
-            $scope.tasks.push(response.data);
-		}
-	}
-	
-	function ProjectsError(error){
-		$scope.loading = false;
-		$scope.info = true;
-		$scope.infoMessage = "No Tasks available"
-	}
-	
 	function DeleteSuccess(response){
 		$scope.loading = false;
 		if(response.status == 204){
@@ -66,11 +59,6 @@ angular.module('thapeloAssignmentApp')
 	
 	$scope.addTask = function(){
 		$location.path('/createtask');
-	}
-	
-	$scope.logout = function(){
-		window.localStorage.removeItem('TrustedToken');
-		$location.path('/login');
 	}
 	
   });

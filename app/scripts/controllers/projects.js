@@ -26,8 +26,9 @@ angular.module('thapeloAssignmentApp')
 	ProjectService.Projects().then(ProjetsSuccess,ProjectsError);
 	
 	//view tasks
-	$scope.view = function(id){
-		$location.path('/viewprojecttasks').search({id: id});
+	$scope.view = function(project){
+		$window.localStorage.setItem('projecttasks', JSON.stringify(project));
+		$location.path('/viewtasks');
 	}
 	
 	//edit project
@@ -70,9 +71,5 @@ angular.module('thapeloAssignmentApp')
 		$location.path('/createproject');
 	}
 	
-	$scope.logout = function(){
-		window.localStorage.removeItem('TrustedToken');
-		$location.path('/login');
-	}
 });
  
