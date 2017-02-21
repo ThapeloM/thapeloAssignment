@@ -46,17 +46,17 @@ angular.module('thapeloAssignmentApp')
 			 console.log(data);
 	            dfd.resolve(data);
 	        }, function (err) {
-	              dfd.reject(err);
+	            dfd.reject(err);
 	        });
 
 	        return dfd.promise;
 	}
 		
 		
-		//create a project
+	//create a project
   	function CreateProjects(project) {
 		  
-  		var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
+  		    var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
   		    if(typeof token == "undefined" || token == null){
   		  	    $location.path("/login");
   		    }
@@ -93,7 +93,7 @@ angular.module('thapeloAssignmentApp')
   	}
 		
 		
-  		//edit a project
+  	//edit a project
     function EditProject(project) {
 		  
     		var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -136,7 +136,7 @@ angular.module('thapeloAssignmentApp')
 		
 		
 		
-		// add tasks to a project
+    // add tasks to a project
     function CreateTask(task) {
 		  
     		var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -174,7 +174,7 @@ angular.module('thapeloAssignmentApp')
     }
 			
 			
-		// delete a project
+    // delete a project
 	function DeleteProject(id) {
 		  
 	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -203,7 +203,7 @@ angular.module('thapeloAssignmentApp')
 	        return dfd.promise;
 	}
 		
-		// add tasks to a project
+    //view to a project
     function ViewTasks(projectID) {
 		  
     		var token = JSON.parse(window.localStorage.getItem('TrustedToken'));
@@ -233,7 +233,7 @@ angular.module('thapeloAssignmentApp')
     }
 		
 		
-		// add tasks to a project
+    // delete tasks 
 	function DeleteTask(id) {
 		  
 	    	var token = JSON.parse(window.localStorage.getItem('TrustedToken'));

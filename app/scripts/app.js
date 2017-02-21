@@ -43,10 +43,6 @@ angular
         templateUrl: 'views/viewTasks.html',
         controller: 'ViewtaskCtrl'
       })
-      .when('/editproject', {
-        templateUrl: 'views/editProject.html',
-        controller: 'EditprojectCtrl'
-      })
       .when('/createtask', {
         templateUrl: 'views/createTask.html',
         controller: 'CreatetaskCtrl'

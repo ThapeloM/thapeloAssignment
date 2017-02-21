@@ -21,19 +21,6 @@ angular.module('thapeloAssignmentApp')
   	  $location.path("/login");
     }
 	
-    var existingtask = JSON.parse(window.localStorage.getItem('task'));
-  
-    if(typeof existingtask == "undefined" || existingtask == null){
-		$scope.addMode = true;
-    }
-	
-	// assigin values for edit mode
-	if(!$scope.addMode){
-		$scope.task = existingtask;
-	}
-	
-	
-    $scope.addMode = true;
     $rootScope.session = true;
 	$scope.success = false;
 	$scope.error = false;
